@@ -1,12 +1,10 @@
 import './App.css';
-import StockFetcher from './currentMarketData';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const apiKey = 'PK7LD2WALYEXWWVPOYQL'; // Replace with your API Key ID
 const secretKey = 'rQxQlfD4mihWbSxjXJQ3MOXc12e9Xf97iepcCx5w'; // Replace with your Secret Key
 const apiServerDomain = 'https://paper-api.alpaca.markets'; // Use the correct domain for paper/live trading
-
 
 function App() {
   // Create state to store account details
@@ -17,7 +15,7 @@ function App() {
   useEffect(() => {
     const getAccount = async () => {
       try {
-        const response = await axios.get(`${apiServerDomain}/v2/account`, {
+        const response = await axios.get(`${apiServerDomain}/v2/account`, { // Fixed here
           headers: {
             'APCA-API-KEY-ID': apiKey,
             'APCA-API-SECRET-KEY': secretKey
@@ -45,7 +43,6 @@ function App() {
           <p><strong>Buying Power:</strong> ${account.buying_power}</p>
           <p><strong>Cash:</strong> ${account.cash}</p>
           <p><strong>Portfolio Value:</strong> ${account.portfolio_value}</p>
-          <StockFetcher/>
         </div>
       ) : (
         <p>Loading...</p>
